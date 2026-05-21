@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as DataRouteImport } from './routes/data'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
@@ -20,6 +21,11 @@ import { Route as OnboardingProfileRouteImport } from './routes/onboarding.profi
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataRoute = DataRouteImport.update({
+  id: '/data',
+  path: '/data',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/analytics': typeof AnalyticsRoute
   '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
+  '/data': typeof DataRoute
   '/login': typeof LoginRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
   '/onboarding/workspace': typeof OnboardingWorkspaceRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/analytics': typeof AnalyticsRoute
   '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
+  '/data': typeof DataRoute
   '/login': typeof LoginRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
   '/onboarding/workspace': typeof OnboardingWorkspaceRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/analytics': typeof AnalyticsRoute
   '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
+  '/data': typeof DataRoute
   '/login': typeof LoginRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
   '/onboarding/workspace': typeof OnboardingWorkspaceRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/chat'
     | '/dashboard'
+    | '/data'
     | '/login'
     | '/onboarding/profile'
     | '/onboarding/workspace'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/chat'
     | '/dashboard'
+    | '/data'
     | '/login'
     | '/onboarding/profile'
     | '/onboarding/workspace'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/chat'
     | '/dashboard'
+    | '/data'
     | '/login'
     | '/onboarding/profile'
     | '/onboarding/workspace'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   AnalyticsRoute: typeof AnalyticsRoute
   ChatRoute: typeof ChatRoute
   DashboardRoute: typeof DashboardRoute
+  DataRoute: typeof DataRoute
   LoginRoute: typeof LoginRoute
   OnboardingProfileRoute: typeof OnboardingProfileRoute
   OnboardingWorkspaceRoute: typeof OnboardingWorkspaceRoute
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data': {
+      id: '/data'
+      path: '/data'
+      fullPath: '/data'
+      preLoaderRoute: typeof DataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnalyticsRoute: AnalyticsRoute,
   ChatRoute: ChatRoute,
   DashboardRoute: DashboardRoute,
+  DataRoute: DataRoute,
   LoginRoute: LoginRoute,
   OnboardingProfileRoute: OnboardingProfileRoute,
   OnboardingWorkspaceRoute: OnboardingWorkspaceRoute,
