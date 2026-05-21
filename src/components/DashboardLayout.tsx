@@ -203,9 +203,3 @@ function DefaultRightPanel() {
   );
 }
 
-// Imported by Database icon usage above
-import { Database as _Db } from "lucide-react";
-void _Db;
-
-import { cn as _cn } from "@/lib/utils";
-void _cn;
