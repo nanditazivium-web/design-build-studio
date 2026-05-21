@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DataRouteImport } from './routes/data'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as OnboardingWorkspaceRouteImport } from './routes/onboarding.workspace'
 import { Route as OnboardingProfileRouteImport } from './routes/onboarding.profile'
 
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/data': typeof DataRoute
   '/login': typeof LoginRoute
+  '/reports': typeof ReportsRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
   '/onboarding/workspace': typeof OnboardingWorkspaceRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/data': typeof DataRoute
   '/login': typeof LoginRoute
+  '/reports': typeof ReportsRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
   '/onboarding/workspace': typeof OnboardingWorkspaceRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/data': typeof DataRoute
   '/login': typeof LoginRoute
+  '/reports': typeof ReportsRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
   '/onboarding/workspace': typeof OnboardingWorkspaceRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/data'
     | '/login'
+    | '/reports'
     | '/onboarding/profile'
     | '/onboarding/workspace'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/data'
     | '/login'
+    | '/reports'
     | '/onboarding/profile'
     | '/onboarding/workspace'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/data'
     | '/login'
+    | '/reports'
     | '/onboarding/profile'
     | '/onboarding/workspace'
   fileRoutesById: FileRoutesById
@@ -130,12 +142,20 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   DataRoute: typeof DataRoute
   LoginRoute: typeof LoginRoute
+  ReportsRoute: typeof ReportsRoute
   OnboardingProfileRoute: typeof OnboardingProfileRoute
   OnboardingWorkspaceRoute: typeof OnboardingWorkspaceRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   DataRoute: DataRoute,
   LoginRoute: LoginRoute,
+  ReportsRoute: ReportsRoute,
   OnboardingProfileRoute: OnboardingProfileRoute,
   OnboardingWorkspaceRoute: OnboardingWorkspaceRoute,
 }
