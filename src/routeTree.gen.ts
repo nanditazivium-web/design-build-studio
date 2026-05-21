@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OnboardingWorkspaceRouteImport } from './routes/onboarding.workspace'
 import { Route as OnboardingProfileRouteImport } from './routes/onboarding.profile'
 
 const LoginRoute = LoginRouteImport.update({
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnboardingWorkspaceRoute = OnboardingWorkspaceRouteImport.update({
+  id: '/onboarding/workspace',
+  path: '/onboarding/workspace',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OnboardingProfileRoute = OnboardingProfileRouteImport.update({
   id: '/onboarding/profile',
   path: '/onboarding/profile',
@@ -33,30 +39,39 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
+  '/onboarding/workspace': typeof OnboardingWorkspaceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
+  '/onboarding/workspace': typeof OnboardingWorkspaceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
+  '/onboarding/workspace': typeof OnboardingWorkspaceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/onboarding/profile'
+  fullPaths: '/' | '/login' | '/onboarding/profile' | '/onboarding/workspace'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/onboarding/profile'
-  id: '__root__' | '/' | '/login' | '/onboarding/profile'
+  to: '/' | '/login' | '/onboarding/profile' | '/onboarding/workspace'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/onboarding/profile'
+    | '/onboarding/workspace'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
   OnboardingProfileRoute: typeof OnboardingProfileRoute
+  OnboardingWorkspaceRoute: typeof OnboardingWorkspaceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,6 +90,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboarding/workspace': {
+      id: '/onboarding/workspace'
+      path: '/onboarding/workspace'
+      fullPath: '/onboarding/workspace'
+      preLoaderRoute: typeof OnboardingWorkspaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/onboarding/profile': {
       id: '/onboarding/profile'
       path: '/onboarding/profile'
@@ -89,6 +111,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
   OnboardingProfileRoute: OnboardingProfileRoute,
+  OnboardingWorkspaceRoute: OnboardingWorkspaceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
