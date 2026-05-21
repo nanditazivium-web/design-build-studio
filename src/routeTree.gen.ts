@@ -10,12 +10,16 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TeamRouteImport } from './routes/team'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DataRouteImport } from './routes/data'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ChatRouteImport } from './routes/chat'
+import { Route as BillingRouteImport } from './routes/billing'
+import { Route as AuditRouteImport } from './routes/audit'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OnboardingWorkspaceRouteImport } from './routes/onboarding.workspace'
@@ -26,6 +30,11 @@ const TeamRoute = TeamRouteImport.update({
   path: '/team',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -34,6 +43,11 @@ const SearchRoute = SearchRouteImport.update({
 const ReportsRoute = ReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -54,6 +68,16 @@ const DashboardRoute = DashboardRouteImport.update({
 const ChatRoute = ChatRouteImport.update({
   id: '/chat',
   path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BillingRoute = BillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AnalyticsRoute = AnalyticsRouteImport.update({
@@ -80,12 +104,16 @@ const OnboardingProfileRoute = OnboardingProfileRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
+  '/audit': typeof AuditRoute
+  '/billing': typeof BillingRoute
   '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
   '/data': typeof DataRoute
   '/login': typeof LoginRoute
+  '/profile': typeof ProfileRoute
   '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
   '/team': typeof TeamRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
   '/onboarding/workspace': typeof OnboardingWorkspaceRoute
@@ -93,12 +121,16 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
+  '/audit': typeof AuditRoute
+  '/billing': typeof BillingRoute
   '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
   '/data': typeof DataRoute
   '/login': typeof LoginRoute
+  '/profile': typeof ProfileRoute
   '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
   '/team': typeof TeamRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
   '/onboarding/workspace': typeof OnboardingWorkspaceRoute
@@ -107,12 +139,16 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
+  '/audit': typeof AuditRoute
+  '/billing': typeof BillingRoute
   '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
   '/data': typeof DataRoute
   '/login': typeof LoginRoute
+  '/profile': typeof ProfileRoute
   '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
   '/team': typeof TeamRoute
   '/onboarding/profile': typeof OnboardingProfileRoute
   '/onboarding/workspace': typeof OnboardingWorkspaceRoute
@@ -122,12 +158,16 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/analytics'
+    | '/audit'
+    | '/billing'
     | '/chat'
     | '/dashboard'
     | '/data'
     | '/login'
+    | '/profile'
     | '/reports'
     | '/search'
+    | '/settings'
     | '/team'
     | '/onboarding/profile'
     | '/onboarding/workspace'
@@ -135,12 +175,16 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/analytics'
+    | '/audit'
+    | '/billing'
     | '/chat'
     | '/dashboard'
     | '/data'
     | '/login'
+    | '/profile'
     | '/reports'
     | '/search'
+    | '/settings'
     | '/team'
     | '/onboarding/profile'
     | '/onboarding/workspace'
@@ -148,12 +192,16 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/analytics'
+    | '/audit'
+    | '/billing'
     | '/chat'
     | '/dashboard'
     | '/data'
     | '/login'
+    | '/profile'
     | '/reports'
     | '/search'
+    | '/settings'
     | '/team'
     | '/onboarding/profile'
     | '/onboarding/workspace'
@@ -162,12 +210,16 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalyticsRoute: typeof AnalyticsRoute
+  AuditRoute: typeof AuditRoute
+  BillingRoute: typeof BillingRoute
   ChatRoute: typeof ChatRoute
   DashboardRoute: typeof DashboardRoute
   DataRoute: typeof DataRoute
   LoginRoute: typeof LoginRoute
+  ProfileRoute: typeof ProfileRoute
   ReportsRoute: typeof ReportsRoute
   SearchRoute: typeof SearchRoute
+  SettingsRoute: typeof SettingsRoute
   TeamRoute: typeof TeamRoute
   OnboardingProfileRoute: typeof OnboardingProfileRoute
   OnboardingWorkspaceRoute: typeof OnboardingWorkspaceRoute
@@ -182,6 +234,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -194,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/reports'
       fullPath: '/reports'
       preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -222,6 +288,20 @@ declare module '@tanstack/react-router' {
       path: '/chat'
       fullPath: '/chat'
       preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/billing': {
+      id: '/billing'
+      path: '/billing'
+      fullPath: '/billing'
+      preLoaderRoute: typeof BillingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/analytics': {
@@ -258,12 +338,16 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalyticsRoute: AnalyticsRoute,
+  AuditRoute: AuditRoute,
+  BillingRoute: BillingRoute,
   ChatRoute: ChatRoute,
   DashboardRoute: DashboardRoute,
   DataRoute: DataRoute,
   LoginRoute: LoginRoute,
+  ProfileRoute: ProfileRoute,
   ReportsRoute: ReportsRoute,
   SearchRoute: SearchRoute,
+  SettingsRoute: SettingsRoute,
   TeamRoute: TeamRoute,
   OnboardingProfileRoute: OnboardingProfileRoute,
   OnboardingWorkspaceRoute: OnboardingWorkspaceRoute,
